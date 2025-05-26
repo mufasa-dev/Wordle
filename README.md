@@ -2,6 +2,8 @@
 
 A simple Wordle-inspired game built with **Svelte**, offering a fast and smooth browser experience.
 
+[![My Skills](https://skillicons.dev/icons?i=html,css,ts,svelte,vite)](https://skillicons.dev)
+
 ## 🚀 About the Project
 
 This is a word-guessing game where you need to figure out a hidden word within **five** attempts. The game provides hints on which letters are correct and their positions.
