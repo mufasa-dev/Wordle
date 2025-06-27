@@ -1,18 +1,23 @@
 <script lang="ts">
-    import Tile from "./Tile.svelte";
     import Keyboard from "./Keyboard.svelte";
     
-    export let word: string = "";
+    export let secretWork: string = "     ";
+    export let word: string = "     ";
 
-    let [l1, l2, l3, l4, l5] = word;
+    function evaluateLetter(letter: string, index: number): string {
+        const correctLetter = secretWork[index];
+        if (letter == correctLetter) return "bg-green-500 text-white";
+        if (secretWork.includes(letter)) return "bg-yellow-500 text-white";
+        return "bg-gray-500"
+    }
 </script>
 
 <div class="flex">
-    <Tile letter={l1} />
-    <Tile letter={l2} />
-    <Tile letter={l3} />
-    <Tile letter={l4} />
-    <Tile letter={l5} />
+    {#each word.split("") as letter, i }
+        <div class={`p-1 ${evaluateLetter(letter, i)}`}>
+            {letter}
+        </div>
+    {/each}
 </div>
 
 <Keyboard />
