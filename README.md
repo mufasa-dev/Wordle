@@ -1,6 +1,6 @@
 # Wordle in Svelte 🎯
 
-A simple Wordle-inspired game built with **Svelte**, offering a fast and smooth browser experience.
+A simple Wordle-inspired game built with **Svelte**, offering a fast and smooth browser experience. 
 
 [![My Skills](https://skillicons.dev/icons?i=html,css,ts,svelte,vite)](https://skillicons.dev)
 
