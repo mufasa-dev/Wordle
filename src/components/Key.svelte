@@ -3,6 +3,6 @@
     export let status: string = "";
 </script>
 
-<div class="p-1 bg-blue-200">
+<div class="p-2 bg-blue-200 rounded text-center cursor-pointer hover:bg-blue-400">
     {letter}
 </div>
