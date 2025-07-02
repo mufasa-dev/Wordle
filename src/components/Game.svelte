@@ -8,9 +8,9 @@
   let start: boolean = false;
   let selectedIndex: number = 0;
 
-  const maxAttempts = 5;
   let actualAtempt: number = 0;
   let attempts: string[] = [
+    "_____",
     "_____",
     "_____",
     "_____",
