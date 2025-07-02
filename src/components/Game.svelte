@@ -27,6 +27,20 @@
   function selectIndex(index: number) {
     selectedIndex = index;
   }
+
+  function addLetter(letter: string): void {
+    if (selectedIndex < 0 || selectedIndex >= word.length) {
+      throw new Error('Índice fora do limite da string');
+    }
+
+    if (letter == "Enter") return;
+    if (letter == "Del") letter = "_";
+
+    attempts[actualAtempt] = attempts[actualAtempt].slice(0, selectedIndex) + letter + attempts[actualAtempt].slice(selectedIndex + 1);
+    if (selectedIndex < attempts[actualAtempt].length - 1) {
+      selectedIndex++;
+    }
+  }
 </script>
 
 <main>
@@ -37,7 +51,7 @@
         <Board secretWork={word} word={attempt} selectedIndex={selectedIndex} selectIndex={selectIndex} isActual={actualAtempt == i} />
       {/each}
 
-      <Keyboard />
+      <Keyboard addLetter={addLetter} />
     {:else}
       <Title onStart={startGame} />
     {/if}
