@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { EnumLetters, validateLetter } from "../game/gameManager";
+
     export let secretWork: string = "_____";
     export let word: string = "_____";
     export let selectedIndex: number = 0;
@@ -10,13 +12,21 @@
         const correctLetter = secretWork[index];
         if (letter == correctLetter) return "bg-green-500 text-white";
         if (secretWork.includes(letter)) return "bg-yellow-500 text-white";
-        if (!isActual) return "bg-gray-400"
+        if (!isActual && letter != "_") return colorLetterByStatus(letter, index);
         return "bg-gray-200"
     }
 
     function evaluateIndex(index: number): string {
         if (isActual && index == selectedIndex) return "scale-110";
         return "";
+    }
+
+    function colorLetterByStatus(letter: string, index: number) {
+        letter = letter.toUpperCase();
+        const status = validateLetter(letter, index);
+        if (status == EnumLetters.Correct) return "bg-green-500";
+        if (status == EnumLetters.InAnotherPlace) return "bg-yellow-500";
+        return "bg-gray-400"
     }
 </script>
 
