@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Key from "./Key.svelte";
+    export let addLetter: (letter: string) => void;
     
     let letters: string[] = [
         "A", "B", "C", "D", "E", "F", "G", "H","I","J", "K", "L", "M", "N",
@@ -9,6 +9,9 @@
 
 <div class="grid grid-cols-10 gap-1 ">
     {#each letters as letter}
-        <Key letter={letter} />
+        <button class="p-2 bg-blue-200 rounded text-center cursor-pointer hover:bg-blue-400"
+            on:click={() => addLetter(letter)}>
+            {letter}
+        </button>
     {/each}
 </div>
