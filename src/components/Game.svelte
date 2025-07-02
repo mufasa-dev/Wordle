@@ -3,25 +3,28 @@
   import Title from './Title.svelte';
   import Board from './Board.svelte';
   import Keyboard from './Keyboard.svelte';
+  import ResultModal from './ResultModal.svelte';
 
   let word: string;
   let start: boolean = false;
   let finish: boolean = false;
+  let finishSuccess: boolean = false;
   let selectedIndex: number = 0;
 
   let actualAtempt: number = 0;
-  let attempts: string[] = [
-    "_____",
-    "_____",
-    "_____",
-    "_____",
-    "_____",
-    "_____"
-  ];
+  let attempts: string[] = [];
 
   function  startGame() {
     word = getRandomWord();
     console.log('palavra', word)
+    attempts = [
+      "_____",
+      "_____",
+      "_____",
+      "_____",
+      "_____",
+      "_____"
+    ];
     start = true;
   }
 
@@ -50,13 +53,28 @@
   function nextAttempt() {
     if (attempts[actualAtempt].includes("_")) return;
 
-    if(attempts[actualAtempt].toUpperCase() == word.toUpperCase() || actualAtempt >= attempts.length) {
+    if(attempts[actualAtempt].toUpperCase() == word.toUpperCase()) {
       finish = true;
+      finishSuccess = true;
+      return;
+    }
+    if (actualAtempt >= attempts.length - 1) {
+      finish = true;
+      finishSuccess = false;
       return;
     }
     
     selectedIndex = 0;
     actualAtempt++;
+  }
+
+  function restartGame() {
+    finish = false;
+    word = "";
+    selectedIndex = 0;
+    actualAtempt = 0;
+    start = false;
+    finishSuccess = false;
   }
 </script>
 
@@ -69,6 +87,10 @@
       {/each}
 
       <Keyboard addLetter={addLetter} />
+
+      {#if finish}
+        <ResultModal word={word} success={finishSuccess} onClose={restartGame} />
+      {/if}
     {:else}
       <Title onStart={startGame} />
     {/if}
