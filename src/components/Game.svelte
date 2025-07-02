@@ -6,6 +6,7 @@
 
   let word: string;
   let start: boolean = false;
+  let finish: boolean = false;
   let selectedIndex: number = 0;
 
   let actualAtempt: number = 0;
@@ -29,17 +30,33 @@
   }
 
   function addLetter(letter: string): void {
+    if (finish) return;
     if (selectedIndex < 0 || selectedIndex >= word.length) {
       throw new Error('Índice fora do limite da string');
     }
 
-    if (letter == "Enter") return;
+    if (letter == "Enter") {
+      nextAttempt();
+      return;
+    }
     if (letter == "Del") letter = "_";
 
     attempts[actualAtempt] = attempts[actualAtempt].slice(0, selectedIndex) + letter + attempts[actualAtempt].slice(selectedIndex + 1);
     if (selectedIndex < attempts[actualAtempt].length - 1) {
       selectedIndex++;
     }
+  }
+  
+  function nextAttempt() {
+    if (attempts[actualAtempt].includes("_")) return;
+
+    if(attempts[actualAtempt].toUpperCase() == word.toUpperCase() || actualAtempt >= attempts.length) {
+      finish = true;
+      return;
+    }
+    
+    selectedIndex = 0;
+    actualAtempt++;
   }
 </script>
 
