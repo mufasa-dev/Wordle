@@ -1,10 +1,12 @@
-    import { writable } from 'svelte/store';
+    import { get, writable } from 'svelte/store';
     import { getRandomWord } from './words';
 
     export enum EnumLetters {
         NotFound = 0,
         InAnotherPlace = 1,
-        Correct = 2
+        Correct = 2,
+        NotLetter = 3,
+        NotUsed = 4
     }
 
     export let word = writable("");
@@ -119,4 +121,31 @@
         } else {
             return EnumLetters.NotFound
         }
+    }
+
+    export function validateKey(letter: string): number {
+        letter = letter.toUpperCase();
+
+        if (letter === "ENTER" || letter === "DEL") {
+            return EnumLetters.NotLetter;
+        }
+
+        const currentWord = get(word).toUpperCase();
+        const allAttempts = get(attempts).map(a => a.toUpperCase());
+
+        const letterWasUsed = allAttempts.some(attempt => attempt.includes(letter));
+        if (!letterWasUsed) {
+            return EnumLetters.NotUsed;
+        }
+
+        const hasCorrectPosition = allAttempts.some(attempt =>
+            attempt.split('').some((char, i) =>
+                char === letter && currentWord[i] === char
+            )
+        );
+        if (hasCorrectPosition) return EnumLetters.Correct;
+
+        if (currentWord.includes(letter)) return EnumLetters.InAnotherPlace;
+
+        return EnumLetters.NotFound;
     }
