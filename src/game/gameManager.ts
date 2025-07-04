@@ -79,6 +79,30 @@
             selectedIndex.update(n => n + 1);
         }
     }
+
+    export function moveCursorLeft() {
+        let selIndex: number = 0;
+        let a: string[] = [];
+        let i: number = 0;
+        attempts.subscribe(val => a = [...val])();
+        actualAtempt.subscribe(val => i = val)();
+        selectedIndex.subscribe(sel => selIndex = sel)();
+        if (selIndex > 0) {
+            selectedIndex.update(n => n - 1);
+        }
+    }
+
+    export function moveCursorRight() {
+        let selIndex: number = 0;
+        let a: string[] = [];
+        let i: number = 0;
+        attempts.subscribe(val => a = [...val])();
+        actualAtempt.subscribe(val => i = val)();
+        selectedIndex.subscribe(sel => selIndex = sel)();
+        if (selIndex < a[i].length - 1) {
+            selectedIndex.update(n => n + 1);
+        }
+    }
     
     export function nextAttempt() {
         let a: string[] = [];
