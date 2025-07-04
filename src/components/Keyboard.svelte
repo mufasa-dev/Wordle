@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { EnumLetters, validateKey, attempts, word } from "../game/gameManager";
+    import { EnumLetters, validateKey, attempts, actualAtempt, word } from "../game/gameManager";
 
     export let addLetter: (letter: string) => void;
     
@@ -11,7 +11,7 @@
     let keyColors: Record<string, string> = {}
 
     $: {
-        const _ = $attempts + $word; // só para forçar dependência
+        const _ = $attempts + $word + $actualAtempt;
         const newColor: Record<string, string> = {};
         for (const letter of letters) {
         const status = validateKey(letter);

@@ -132,13 +132,16 @@
 
         const currentWord = get(word).toUpperCase();
         const allAttempts = get(attempts).map(a => a.toUpperCase());
+        const currentIndex = get(actualAtempt);
 
-        const letterWasUsed = allAttempts.some(attempt => attempt.includes(letter));
+        const previousAttempts = allAttempts.slice(0, currentIndex);
+
+        const letterWasUsed = previousAttempts.some(attempt => attempt.includes(letter));
         if (!letterWasUsed) {
             return EnumLetters.NotUsed;
         }
 
-        const hasCorrectPosition = allAttempts.some(attempt =>
+        const hasCorrectPosition = previousAttempts.some(attempt =>
             attempt.split('').some((char, i) =>
                 char === letter && currentWord[i] === char
             )
