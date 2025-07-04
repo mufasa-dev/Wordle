@@ -27,7 +27,6 @@
     export function  startGame() {
         const secret = getRandomWord();
         word.set(secret);
-        console.log('palavra', word)
         attempts.set([
         "_____",
         "_____",
