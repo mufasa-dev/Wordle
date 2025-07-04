@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount, onDestroy } from 'svelte';
-    import { EnumLetters, validateKey, attempts, actualAtempt, word } from "../game/gameManager";
+    import { EnumLetters, validateKey, attempts, actualAtempt, word, moveCursorLeft, moveCursorRight } from "../game/gameManager";
 
     export let addLetter: (letter: string) => void;
     
@@ -32,12 +32,16 @@
     const key = event.key.toUpperCase();
 
     if (key === 'ENTER') {
-      addLetter('Enter');
+        addLetter('Enter');
     } else if (key === 'BACKSPACE') {
-      addLetter('Del');
+        addLetter('Del');
     } else if (/^[A-ZÇ]$/.test(key)) {
-      addLetter(key);
-    }
+        addLetter(key);
+    } else if (key == 'ARROWLEFT') {
+        moveCursorLeft();
+    } else if (key == 'ARROWRIGHT') {
+        moveCursorRight();
+    } 
   }
 
   onMount(() => {
