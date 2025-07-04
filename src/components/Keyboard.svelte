@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount, onDestroy } from 'svelte';
-    import { EnumLetters, validateKey, attempts, actualAtempt, word, moveCursorLeft, moveCursorRight } from "../game/gameManager";
+    import { EnumLetters, validateKey, attempts, actualAtempt, word, moveCursorLeft, moveCursorRight, finish, restartGame } from "../game/gameManager";
 
     export let addLetter: (letter: string) => void;
     
@@ -29,28 +29,34 @@
     }
 
     function handleKeydown(event: KeyboardEvent) {
-    const key = event.key.toUpperCase();
+        const key = event.key.toUpperCase();
 
-    if (key === 'ENTER') {
-        addLetter('Enter');
-    } else if (key === 'BACKSPACE') {
-        addLetter('Del');
-    } else if (/^[A-ZÇ]$/.test(key)) {
-        addLetter(key);
-    } else if (key == 'ARROWLEFT') {
-        moveCursorLeft();
-    } else if (key == 'ARROWRIGHT') {
-        moveCursorRight();
-    } 
-  }
+        if ($finish) {
+            if (key === 'ENTER') {
+                restartGame();
+            }
+            return;
+        }
+        if (key === 'ENTER') {
+            addLetter('Enter');
+        } else if (key === 'BACKSPACE') {
+            addLetter('Del');
+        } else if (/^[A-ZÇ]$/.test(key)) {
+            addLetter(key);
+        } else if (key == 'ARROWLEFT') {
+            moveCursorLeft();
+        } else if (key == 'ARROWRIGHT') {
+            moveCursorRight();
+        } 
+    }
 
-  onMount(() => {
-    window.addEventListener('keydown', handleKeydown);
-  });
+    onMount(() => {
+        window.addEventListener('keydown', handleKeydown);
+    });
 
-  onDestroy(() => {
-    window.removeEventListener('keydown', handleKeydown);
-  });
+    onDestroy(() => {
+        window.removeEventListener('keydown', handleKeydown);
+    });
 </script>
 
 <div class="grid grid-cols-10 gap-1 ">
