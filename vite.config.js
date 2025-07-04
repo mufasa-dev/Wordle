@@ -5,7 +5,7 @@ const base = '/wordle/'
 
 export default defineConfig({
   plugins: [svelte()],
-  base: '/wordle/',
+  base: '/Wordle/',
   test: {
     globals: true,
     environment: 'jsdom',
