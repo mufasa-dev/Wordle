@@ -61,7 +61,14 @@
             nextAttempt();
             return;
         }
-        if (letter == "Del") letter = "_";
+        if (letter == "Del") {
+            a[i] = a[i].slice(0, selIndex) + '_' + a[i].slice(selIndex + 1);
+            attempts.set(a);
+            if (selIndex > 0) {
+                selectedIndex.update(n => n - 1);
+            }
+            return;
+        }
 
         if (selIndex < 0 || selIndex >= w.length) return;
 
