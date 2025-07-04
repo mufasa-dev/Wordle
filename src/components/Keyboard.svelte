@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { onMount, onDestroy } from 'svelte';
     import { EnumLetters, validateKey, attempts, actualAtempt, word } from "../game/gameManager";
 
     export let addLetter: (letter: string) => void;
@@ -26,6 +27,26 @@
         }
         keyColors = newColor;
     }
+
+    function handleKeydown(event: KeyboardEvent) {
+    const key = event.key.toUpperCase();
+
+    if (key === 'ENTER') {
+      addLetter('Enter');
+    } else if (key === 'BACKSPACE') {
+      addLetter('Del');
+    } else if (/^[A-ZÇ]$/.test(key)) {
+      addLetter(key);
+    }
+  }
+
+  onMount(() => {
+    window.addEventListener('keydown', handleKeydown);
+  });
+
+  onDestroy(() => {
+    window.removeEventListener('keydown', handleKeydown);
+  });
 </script>
 
 <div class="grid grid-cols-10 gap-1 ">
