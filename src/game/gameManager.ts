@@ -23,9 +23,13 @@
         "_____",
         "_____"
     ]);
+    export let language = writable<'pt' | 'en'>('en'); 
 
     export function  startGame() {
-        const secret = getRandomWord();
+        let lang: string = "en";
+        language.subscribe(val => lang = val)();
+
+        const secret = getRandomWord(lang);
         word.set(secret);
         attempts.set([
         "_____",
