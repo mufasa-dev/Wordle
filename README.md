@@ -2,7 +2,9 @@
 
 A simple Wordle-inspired game built with **Svelte**, offering a fast and smooth browser experience. 
 
-[![My Skills](https://skillicons.dev/icons?i=html,css,ts,svelte,vite)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=html,css,ts,svelte,vite,vitest)](https://skillicons.dev)
+
+🔗 **[Click here to play the game](https://mufasa-dev.github.io/Wordle/)**
 
 ## 🚀 About the Project
 
@@ -14,8 +16,7 @@ This project was developed using:
 
 - [Svelte](https://svelte.dev/) - A reactive and efficient web framework
 - [Vite](https://vitejs.dev/) - For a fast development environment
-- CSS - For styling
-- LocalStorage - To save game history
+- [TailwindCSS](https://tailwindcss.com/) - Utility-first CSS framework
 
 ## 💻 How to Run the Project?
 
@@ -40,9 +41,9 @@ Access http://localhost:5173 to play! 🎉
 
 ✅ Responsive and simple interface 
 
-✅ Track guessed words using LocalStorage 
-
 ✅ Visual feedback for each attempt
+
+✅ Support for multiple languages
 
 ## 🛠 Future Improvements
 
