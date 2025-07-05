@@ -1,7 +1,8 @@
 <script lang="ts">
-  import { language } from "../game/gameManager";
-  
-  export let onStart: () => void;
+  import { language, startGame } from "../game/gameManager";
+  import { translations } from '../i18n';
+
+  $: t = translations[$language];
 
   const languages = [
     { code: 'en', label: 'English', flag: '/Wordle/flags/usa.png' },
@@ -17,8 +18,8 @@
 </script>
 
 <div class="text-center">
-    <h1 class="text-center text-white text-5xl font-bold">Wordle</h1>
-    <h2 class="text-white text-2xl my-1">Get 6 chances to guess a 5-letter word.</h2>
+    <h1 class="text-center text-white text-5xl font-bold">{t.title}</h1>
+    <h2 class="text-white text-2xl my-1">{t.subtitle}</h2>
     <div class="flex justify-center mt-2">
       <div class="relative w-40 mr-2">
         <button class="bg-white rounded-full w-full border p-2 px-4 flex items-center justify-between" 
@@ -42,8 +43,8 @@
           </ul>
         {/if}
       </div>
-      <button on:click={onStart} class="bg-blue-900 text-white rounded-full px-10 py-2 hover:bg-blue-950">
-          Play
+      <button on:click={startGame} class="bg-blue-900 text-white rounded-full px-10 py-2 hover:bg-blue-950">
+          {t.play}
       </button>
     </div>
 </div>
