@@ -1,4 +1,9 @@
 <script lang="ts">
+    import { language } from '../game/gameManager';
+    import { translations } from '../i18n';
+
+    $: t = translations[$language];
+
     export let success: boolean = false;
     export let word: string = "";
     export let onClose = () => {};
@@ -13,19 +18,19 @@
 <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
 <!-- Modal -->
 <div class="bg-white rounded-lg shadow-lg p-6 w-96 text-center animate-fade-in">
-    <h2 class="text-2xl font-bold {modalColor()} mb-4">Wordle</h2>
+    <h2 class="text-2xl font-bold {modalColor()} mb-4">{t.title}</h2>
     {#if success}
-        <p class="text-gray-700 mb-6">Você conseguiu. Parabéns. <br />
-            A palavra era: <b>{word}</b>
+        <p class="text-gray-700 mb-6">{t.success} <br />
+            {t.theWordWas}: <b>{word}</b>
         </p>
     {:else}
-        <p class="text-gray-700 mb-6">Você fracassou. <br />
-            A palavra era: <b>{word}</b>
+        <p class="text-gray-700 mb-6">{t.fail} <br />
+            {t.theWordWas}: <b>{word}</b>
         </p>
     {/if}
     <button on:click={onClose}
         class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition">
-        Fechar
+        {t.tryAgain}
     </button>
 </div>
 </div>
