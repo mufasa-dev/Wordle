@@ -2,7 +2,7 @@
 
 A simple Wordle-inspired game built with **Svelte**, offering a fast and smooth browser experience.
 
-[![My Skills](https://skillicons.dev/icons?i=html,css,ts,svelte,vite,vitest)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=html,css,ts,svelte,vite,tailwind,vitest)](https://skillicons.dev)
 
 🔗 **[Click here to play the game](https://mufasa-dev.github.io/Wordle/)**
 
